@@ -19,7 +19,7 @@ struct LaunchView: View {
             Text("Anbulance")
                 .fontWeight(.heavy)
                 .foregroundColor(Color("AnbulanceBlue"))
-                .font(.system(size: 35))
+                .font(.system(size: 40))
                 .padding(.bottom, 100.0)
             Button(
                 action: {
