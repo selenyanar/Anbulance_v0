@@ -14,6 +14,7 @@
 		16F167CD2619CA6F005F75CB /* AnbulanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167CC2619CA6F005F75CB /* AnbulanceTests.swift */; };
 		16F167D82619CA6F005F75CB /* AnbulanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167D72619CA6F005F75CB /* AnbulanceUITests.swift */; };
 		16F167E82619DF0D005F75CB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167E72619DF0D005F75CB /* LoginView.swift */; };
+		16F167EA261A09C1005F75CB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167E9261A09C1005F75CB /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		16F167D72619CA6F005F75CB /* AnbulanceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnbulanceUITests.swift; sourceTree = "<group>"; };
 		16F167D92619CA6F005F75CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16F167E72619DF0D005F75CB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		16F167E9261A09C1005F75CB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				16F167BC2619CA6E005F75CB /* LaunchView.swift */,
 				16F167E72619DF0D005F75CB /* LoginView.swift */,
+				16F167E9261A09C1005F75CB /* SignUpView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16F167EA261A09C1005F75CB /* SignUpView.swift in Sources */,
 				16F167E82619DF0D005F75CB /* LoginView.swift in Sources */,
 				16F167BD2619CA6E005F75CB /* LaunchView.swift in Sources */,
 				16F167BB2619CA6E005F75CB /* AnbulanceApp.swift in Sources */,
