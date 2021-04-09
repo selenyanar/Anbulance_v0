@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		16646B70261CDC2F008C970F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B6F261CDC2F008C970F /* MapView.swift */; };
 		16646B72262024BF008C970F /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B71262024BF008C970F /* MapModel.swift */; };
+		16646B742620364E008C970F /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B732620364E008C970F /* ReportView.swift */; };
+		16646B7626206034008C970F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B7526206034008C970F /* TextView.swift */; };
 		16F167BB2619CA6E005F75CB /* AnbulanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167BA2619CA6E005F75CB /* AnbulanceApp.swift */; };
 		16F167BD2619CA6E005F75CB /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167BC2619CA6E005F75CB /* LaunchView.swift */; };
 		16F167BF2619CA6F005F75CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16F167BE2619CA6F005F75CB /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		16646B6F261CDC2F008C970F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		16646B71262024BF008C970F /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		16646B732620364E008C970F /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		16646B7526206034008C970F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		16F167B72619CA6E005F75CB /* Anbulance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anbulance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16F167BA2619CA6E005F75CB /* AnbulanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnbulanceApp.swift; sourceTree = "<group>"; };
 		16F167BC2619CA6E005F75CB /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				16F167E72619DF0D005F75CB /* LoginView.swift */,
 				16F167E9261A09C1005F75CB /* SignUpView.swift */,
 				16646B6F261CDC2F008C970F /* MapView.swift */,
+				16646B732620364E008C970F /* ReportView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				16646B71262024BF008C970F /* MapModel.swift */,
+				16646B7526206034008C970F /* TextView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,9 +294,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F167EA261A09C1005F75CB /* SignUpView.swift in Sources */,
+				16646B7626206034008C970F /* TextView.swift in Sources */,
 				16F167E82619DF0D005F75CB /* LoginView.swift in Sources */,
 				16646B70261CDC2F008C970F /* MapView.swift in Sources */,
 				16F167BD2619CA6E005F75CB /* LaunchView.swift in Sources */,
+				16646B742620364E008C970F /* ReportView.swift in Sources */,
 				16646B72262024BF008C970F /* MapModel.swift in Sources */,
 				16F167BB2619CA6E005F75CB /* AnbulanceApp.swift in Sources */,
 			);
