@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReportView: View {
     @State private var image: Image?
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
     
     var body: some View {
         VStack {
@@ -17,7 +19,6 @@ struct ReportView: View {
                     .fill(Color.white)
                     .frame(width: 300, height: 220, alignment: .center)
                     .cornerRadius(8)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 1))
                 
                 // DİSPLAY THE IMAGE
                 if image != nil {
@@ -25,7 +26,6 @@ struct ReportView: View {
                         .resizable()
                         .scaledToFit()
                 } else {
-                    
                     Image(systemName: "plus")
                         .foregroundColor(Color("AnbulanceBlue"))  
                 }
@@ -35,6 +35,7 @@ struct ReportView: View {
             .offset(y: -20)
             .onTapGesture {
                 // Select Image
+                self.showingImagePicker = true
             }
             TextView()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -57,6 +58,7 @@ struct ReportView: View {
                     .font(.system(size: 20))
                     .fontWeight(.bold)
             }
+            
             ZStack {
                 Button(
                     action: {
@@ -74,6 +76,16 @@ struct ReportView: View {
                     .padding()
             }
         }
+        
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage)
+        }
+        
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
     
     struct ReportView_Previews: PreviewProvider {
