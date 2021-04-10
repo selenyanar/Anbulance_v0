@@ -11,12 +11,17 @@ import SwiftUI
 
 
 struct TextView: UIViewRepresentable {
- 
+    
     func makeUIView(context: Context) -> UITextView {
- 
+        
+        let textView = UITextView()
+        
+        textView.autocapitalizationType = .sentences
+        textView.isUserInteractionEnabled = true
+        
         return UITextView()
     }
- 
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         // Update the view
     }
