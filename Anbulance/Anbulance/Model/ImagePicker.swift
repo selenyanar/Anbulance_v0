@@ -25,8 +25,6 @@ struct ImagePicker: UIViewControllerRepresentable {
             parent.presentationMode.wrappedValue.dismiss()
             
         }
-        
-        
     }
     
     @Environment(\.presentationMode) var presentationMode

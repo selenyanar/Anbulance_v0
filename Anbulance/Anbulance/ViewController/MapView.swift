@@ -10,18 +10,29 @@ import SwiftUI
 
 struct MapView: View {
     var body: some View {
-        ZStack {
-            MapModel()
-                .edgesIgnoringSafeArea(.all)
+        NavigationView {
             ZStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .frame(width: 300, height: 60, alignment: .center)
-                    .foregroundColor(Color("AnbulanceBlue"))
-                Text("YARALI HAYVAN BİLDİR")
-                    .foregroundColor(.white)
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-            }.offset(y: 300)
+                MapModel()
+                    .edgesIgnoringSafeArea(.all)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(width: 300, height: 60, alignment: .center)
+                        .foregroundColor(Color("AnbulanceBlue"))
+                    Text("YARALI HAYVAN BİLDİR")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                }
+                .offset(y: 200)
+
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Çıkış yap") {
+                        print("çıkış yap")
+                    }
+                }
+            }
         }
     }
 }

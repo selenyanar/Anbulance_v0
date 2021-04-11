@@ -12,6 +12,7 @@ import MapKit
 
 
 struct MapModel: UIViewRepresentable {
+
     
     typealias UIViewType = UIView
     
@@ -35,6 +36,11 @@ struct MapModel: UIViewRepresentable {
             map.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
+        
+        let pin = MKPointAnnotation()
+        pin.coordinate = CLLocationCoordinate2D(latitude: 40.9907822322955, longitude: 28.920995484659933)
+        pin.title = "Yedikule Hayvan Barınağı"
+        map.addAnnotation(pin)
         
         return view
     }
