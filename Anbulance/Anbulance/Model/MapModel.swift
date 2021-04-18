@@ -17,7 +17,6 @@ struct MapModel: UIViewRepresentable {
     
     let yedikuleShelter = ShelterAnnotation(title: "Yedikule Hayvan Barınağı", coordinate: CLLocationCoordinate2D(latitude: 40.9907822322955, longitude: 28.920995484659933))
     
-    typealias UIViewType = UIView
     
     func makeUIView(context: Context) -> UIView {
         
@@ -32,13 +31,7 @@ struct MapModel: UIViewRepresentable {
             map.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
-        
-        //   let pin = MKPointAnnotation()
-        //   pin.coordinate = CLLocationCoordinate2D(latitude: 40.9907822322955, longitude: 28.920995484659933)
-        //   pin.title = "Yedikule Hayvan Barınağı"
-        //    map.addAnnotation(pin)
-        
-        
+
         return view
     }
     
@@ -54,8 +47,9 @@ struct MapModel: UIViewRepresentable {
                         annotation: MKAnnotation) -> MKAnnotationView?{
             //Custom View for Annotation
             let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customView")
+            annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             annotationView.canShowCallout = true
-            //Your custom image icon
+            //Custom Image Icon
             annotationView.image = #imageLiteral(resourceName: "AnbulancePin")
             annotationView.frame.size = CGSize(width: 50, height: 50)
             return annotationView
@@ -72,11 +66,9 @@ struct MapModel: UIViewRepresentable {
         }
     }
     
-    
-    
+
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        
         let coordinate = CLLocationCoordinate2D(latitude: 41.01224, longitude: 28.976018)
         let span = MKCoordinateSpan(latitudeDelta: 0.7,
                                     longitudeDelta: 0.7)
