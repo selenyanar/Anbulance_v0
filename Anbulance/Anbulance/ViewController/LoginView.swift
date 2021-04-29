@@ -38,7 +38,7 @@ struct LoginView: View {
                     Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(Color("AnbulanceBlue"))
                 }
-   
+                
                 if self.visible {
                     TextField("Parola", text: self.$parola)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -52,7 +52,20 @@ struct LoginView: View {
                         .cornerRadius(8)
                     
                 }
-    
+                
+            }
+            
+            HStack {
+                Button(action: {
+                    //Forgot password action
+                }) {
+                 
+                   Text("Parolamı unuttum")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("AnbulanceBlue"))
+                    .padding(.leading, 180.0)
+                    
+                }
             }
             
             Button(
