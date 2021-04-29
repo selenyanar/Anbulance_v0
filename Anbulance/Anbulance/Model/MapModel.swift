@@ -31,30 +31,10 @@ struct MapModel: UIViewRepresentable {
             map.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             
         ])
-
+        
         return view
     }
     
-    
-    class MapViewCoordinator: NSObject, MKMapViewDelegate {
-        var mapModelController: MapModel
-        
-        init(_ control: MapModel) {
-            self.mapModelController = control
-        }
-        
-        func mapView(_ mapView: MKMapView, viewFor
-                        annotation: MKAnnotation) -> MKAnnotationView?{
-            //Custom View for Annotation
-            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customView")
-            annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            annotationView.canShowCallout = true
-            //Custom Image Icon
-            annotationView.image = #imageLiteral(resourceName: "AnbulancePin")
-            annotationView.frame.size = CGSize(width: 50, height: 50)
-            return annotationView
-        }
-    }
     
     class ShelterAnnotation: NSObject, MKAnnotation {
         let title: String?
@@ -66,7 +46,8 @@ struct MapModel: UIViewRepresentable {
         }
     }
     
-
+    
+    
     
     func updateUIView(_ uiView: UIView, context: Context) {
         let coordinate = CLLocationCoordinate2D(latitude: 41.01224, longitude: 28.976018)
@@ -79,11 +60,43 @@ struct MapModel: UIViewRepresentable {
         map.delegate = context.coordinator
         map.addAnnotation(yedikuleShelter)
         
-        
     }
     
     func makeCoordinator() -> MapViewCoordinator{
         MapViewCoordinator(self)
+    }
+    
+    
+}
+
+class MapViewCoordinator: NSObject, MKMapViewDelegate {
+    var mapModelController: MapModel
+    
+    init(_ control: MapModel) {
+        self.mapModelController = control
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor
+                    annotation: MKAnnotation) -> MKAnnotationView?{
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customView")
+        //Custom Image Icon
+        annotationView.image = #imageLiteral(resourceName: "AnbulancePin")
+        annotationView.frame.size = CGSize(width: 50, height: 50)
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let btn = UIButton(type: .detailDisclosure)
+        view.canShowCallout = true
+        view.rightCalloutAccessoryView = btn
+
+    }
+    
+    //Display alert once annotation is tapped
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            print("annotation is tapped")
+        
     }
     
 }

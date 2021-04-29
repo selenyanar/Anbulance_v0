@@ -11,6 +11,7 @@ struct LoginView: View {
     
     @State var email = ""
     @State var parola = ""
+    @State var visible = false
     
     var body: some View {
         
@@ -23,18 +24,35 @@ struct LoginView: View {
             HStack {
                 Image(systemName: "envelope")
                     .foregroundColor(.gray)
-                TextField("Email", text: $email)
+                TextField("Email", text: self.$email)
                     .frame(width: 300, height: 50, alignment: .center)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .cornerRadius(8)
             }
             HStack {
-                Image(systemName: "key")
-                    .foregroundColor(.gray)
-                TextField("Parola", text: $parola)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 300, height: 50, alignment: .center)
-                    .cornerRadius(8)
+                
+                Button(action: {
+                    self.visible.toggle()
+                    
+                }) {
+                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor(Color("AnbulanceBlue"))
+                }
+   
+                if self.visible {
+                    TextField("Parola", text: self.$parola)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 300, height: 50, alignment: .center)
+                        .cornerRadius(8)
+                    
+                } else {
+                    SecureField("Parola", text: self.$parola)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 300, height: 50, alignment: .center)
+                        .cornerRadius(8)
+                    
+                }
+    
             }
             
             Button(
