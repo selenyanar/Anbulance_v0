@@ -7,11 +7,11 @@
 
 import MapKit
 import SwiftUI
+import Firebase
 
 struct MapView: View {
     
     var body: some View {
-        NavigationView {
             ZStack {
                 MapModel()
                     .edgesIgnoringSafeArea(.all)
@@ -31,10 +31,13 @@ struct MapView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Çıkış yap") {
                         print("çıkış yap")
+                        try! Auth.auth().signOut()
+                        UserDefaults.standard.set(false,forKey: "status")
+                        NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                    
                     }
                 }
             }
-        }
     }
 }
 

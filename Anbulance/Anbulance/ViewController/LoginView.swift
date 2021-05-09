@@ -23,7 +23,6 @@ struct LoginView: View {
             
             ZStack {
                 
-                
                 VStack {
                     
                     if self.status {

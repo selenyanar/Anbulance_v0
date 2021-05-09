@@ -19,6 +19,7 @@ struct SignUpView: View {
     @State var revisible = false
     @State var alert = false
     @State var error = ""
+    @State var willMoveToNextScreen =  true
     
     var body: some View {
         
@@ -102,23 +103,25 @@ struct SignUpView: View {
                     }
                 }.padding(.bottom, 130.0)
                 
-                Button(action: {
-                    //REGISTER FIREBASE
-                    
-                    self.register()
-                    
-                }) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .frame(width: 300, height: 50, alignment: .center)
-                            .foregroundColor(Color("AnbulanceBlue"))
-                            .cornerRadius(8)
-                        Text("Kaydol")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .font(.system(size: 18))
-                    }.padding(.bottom, 20)
-                }
+                NavigationLink(
+                    destination: MapView(),
+                    label: {
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 300, height: 50, alignment: .center)
+                                .foregroundColor(Color("AnbulanceBlue"))
+                                .cornerRadius(8)
+                            Text("Kaydol")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .font(.system(size: 18))
+                        }
+                        .simultaneousGesture(TapGesture().onEnded{
+                            self.register()
+                                        })
+                        .padding(.bottom, 20)
+                    })
                 
             }
             
@@ -142,6 +145,7 @@ struct SignUpView: View {
                         
                         self.error = err!.localizedDescription
                         self.alert.toggle()
+                        
                         return
                         
                     }
@@ -167,7 +171,6 @@ struct SignUpView: View {
             
         }
     }
-    
 }
 
 struct SignUpView_Previews: PreviewProvider {
