@@ -51,6 +51,7 @@ struct SignUpView: View {
                     Image(systemName: "envelope")
                         .foregroundColor(.gray)
                     TextField("Email", text: $email)
+                        .autocapitalization(.none)
                         .frame(width: 300, height: 50, alignment: .center)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .cornerRadius(8)
@@ -66,12 +67,14 @@ struct SignUpView: View {
                     
                     if self.visible {
                         TextField("Parola oluştur", text: self.$parola)
+                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 300, height: 50, alignment: .center)
                             .cornerRadius(8)
                         
                     } else {
                         SecureField("Parola oluştur", text: self.$parola)
+                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 300, height: 50, alignment: .center)
                             .cornerRadius(8)
@@ -90,12 +93,14 @@ struct SignUpView: View {
                     
                     if self.revisible {
                         TextField("Parolayı yeniden gir", text: self.$reparola)
+                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 300, height: 50, alignment: .center)
                             .cornerRadius(8)
                         
                     } else {
                         SecureField("Parolayı yeniden gir", text: self.$reparola)
+                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 300, height: 50, alignment: .center)
                             .cornerRadius(8)

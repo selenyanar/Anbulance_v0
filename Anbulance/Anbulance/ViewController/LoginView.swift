@@ -41,6 +41,7 @@ struct LoginView: View {
                                 Image(systemName: "envelope")
                                     .foregroundColor(.gray)
                                 TextField("Email", text: self.$email)
+                                    .autocapitalization(.none)
                                     .frame(width: 300, height: 50, alignment: .center)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                     .cornerRadius(8)
@@ -57,12 +58,14 @@ struct LoginView: View {
                                 
                                 if self.visible {
                                     TextField("Parola", text: self.$parola)
+                                        .autocapitalization(.none)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .frame(width: 300, height: 50, alignment: .center)
                                         .cornerRadius(8)
                                     
                                 } else {
                                     SecureField("Parola", text: self.$parola)
+                                        .autocapitalization(.none)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .frame(width: 300, height: 50, alignment: .center)
                                         .cornerRadius(8)
@@ -74,6 +77,9 @@ struct LoginView: View {
                             HStack {
                                 Button(action: {
                                     //Forgot password action
+                                    
+                                    self.reset()
+                                    
                                 }) {
                                     
                                     Text("Parolamı unuttum")
@@ -140,6 +146,31 @@ struct LoginView: View {
             
         }
     }
+    
+    func reset() {
+        
+        if self.email != "" {
+            
+            Auth.auth().sendPasswordReset(withEmail: self.email) { (err) in
+                
+                if err != nil {
+                    
+                    self.error = err!.localizedDescription
+                    self.alert.toggle()
+                    return
+                    
+                }
+                
+                self.error = "SIFIRLA"
+                self.alert.toggle()
+                
+            }
+        }
+        else {
+            self.error = "Lütfen email adresinizi girin"
+            self.alert.toggle()
+        }
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -162,7 +193,7 @@ struct ErrorView: View {
             VStack {
                 
                 HStack {
-                    Text("Hata")
+                    Text(self.error == "SIFIRLA" ? "Message" : "Hata")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(self.color)
@@ -171,7 +202,7 @@ struct ErrorView: View {
                 }
                 .padding(.horizontal, 25)
                 
-                Text(self.error)
+                Text(self.error == "SIFIRLA" ? "Parolanızı sıfırlama E-Postası gönderildi." : self.error)
                     .foregroundColor(self.color)
                     .padding(.top)
                     .padding(.horizontal, 25)
@@ -182,7 +213,7 @@ struct ErrorView: View {
                     
                 }) {
                     
-                    Text("İptal")
+                    Text(self.error == "SIFIRLA" ? "OK" : "İptal")
                         .foregroundColor(.white)
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width-120)
