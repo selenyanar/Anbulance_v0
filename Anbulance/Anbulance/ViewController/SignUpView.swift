@@ -111,7 +111,6 @@ struct SignUpView: View {
                 NavigationLink(
                     destination: MapView(),
                     label: {
-                        
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .frame(width: 300, height: 50, alignment: .center)

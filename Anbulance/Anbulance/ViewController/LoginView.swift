@@ -24,93 +24,76 @@ struct LoginView: View {
             ZStack {
                 
                 VStack {
+                    Image("AnbulanceLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(80.0)
+                        .edgesIgnoringSafeArea(.all)
+                    HStack {
+                        Image(systemName: "envelope")
+                            .foregroundColor(.gray)
+                        TextField("Email", text: self.$email)
+                            .autocapitalization(.none)
+                            .frame(width: 300, height: 50, alignment: .center)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .cornerRadius(8)
+                    }
+                    HStack {
+                        
+                        Button(action: {
+                            self.visible.toggle()
+                            
+                        }) {
+                            Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                                .foregroundColor(Color("AnbulanceBlue"))
+                        }
+                        
+                        if self.visible {
+                            TextField("Parola", text: self.$parola)
+                                .autocapitalization(.none)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 300, height: 50, alignment: .center)
+                                .cornerRadius(8)
+                            
+                        } else {
+                            SecureField("Parola", text: self.$parola)
+                                .autocapitalization(.none)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 300, height: 50, alignment: .center)
+                                .cornerRadius(8)
+                            
+                        }
+                        
+                    }
                     
-                    if self.status {
-                        
-                        MapView()
-                        
-                    } else {
-                        
-                        VStack {
-                            Image("AnbulanceLogo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(80.0)
-                                .edgesIgnoringSafeArea(.all)
-                            HStack {
-                                Image(systemName: "envelope")
-                                    .foregroundColor(.gray)
-                                TextField("Email", text: self.$email)
-                                    .autocapitalization(.none)
-                                    .frame(width: 300, height: 50, alignment: .center)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .cornerRadius(8)
-                            }
-                            HStack {
-                                
-                                Button(action: {
-                                    self.visible.toggle()
-                                    
-                                }) {
-                                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                                        .foregroundColor(Color("AnbulanceBlue"))
-                                }
-                                
-                                if self.visible {
-                                    TextField("Parola", text: self.$parola)
-                                        .autocapitalization(.none)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .frame(width: 300, height: 50, alignment: .center)
-                                        .cornerRadius(8)
-                                    
-                                } else {
-                                    SecureField("Parola", text: self.$parola)
-                                        .autocapitalization(.none)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .frame(width: 300, height: 50, alignment: .center)
-                                        .cornerRadius(8)
-                                    
-                                }
-                                
-                            }
+                    HStack {
+                        Button(action: {
+                            //Forgot password action
+                            self.reset()
                             
-                            HStack {
-                                Button(action: {
-                                    //Forgot password action
-                                    
-                                    self.reset()
-                                    
-                                }) {
-                                    
-                                    Text("Parolamı unuttum")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color("AnbulanceBlue"))
-                                        .padding(.leading, 180.0)
-                                    
-                                }
-                            }
+                        }) {
                             
-                            Button(
-                                action: {
-                                    self.verify()},
-                                label: {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: 300, height: 50, alignment: .center)
-                                        .foregroundColor(Color("AnbulanceBlue"))
-                                        .cornerRadius(8)
-                                        .padding(.top, 100.0)
-                                })
+                            Text("Parolamı unuttum")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("AnbulanceBlue"))
+                                .padding(.leading, 180.0)
+                            
                         }
                     }
-                }
-                .onAppear {
-                    NotificationCenter.default.addObserver(forName: NSNotification.Name("status"), object: nil, queue: .main) { (_) in
-                        
-                        self.status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
-                        
-                    }
                     
+                    Button(
+                        action: {
+                            self.verify()},
+                        label: {
+                            RoundedRectangle(cornerRadius: 5)
+                                .frame(width: 300, height: 50, alignment: .center)
+                                .foregroundColor(Color("AnbulanceBlue"))
+                                .cornerRadius(8)
+                                .padding(.top, 100.0)
+                        })
                 }
+                
+                
             }
             
             if self.alert {

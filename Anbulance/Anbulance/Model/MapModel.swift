@@ -46,9 +46,6 @@ struct MapModel: UIViewRepresentable {
         }
     }
     
-    
-    
-    
     func updateUIView(_ uiView: UIView, context: Context) {
         let coordinate = CLLocationCoordinate2D(latitude: 41.01224, longitude: 28.976018)
         let span = MKCoordinateSpan(latitudeDelta: 0.7,
