@@ -26,8 +26,7 @@ struct LaunchView: View {
                         MapView()
                         
                     } else {
-                        
-                        
+                           
                         VStack {
                             Image("AnbulanceLogo")
                                 .resizable()

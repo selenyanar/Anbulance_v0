@@ -47,12 +47,16 @@ struct MapModel: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
+        
         let coordinate = CLLocationCoordinate2D(latitude: 41.01224, longitude: 28.976018)
         let span = MKCoordinateSpan(latitudeDelta: 0.7,
                                     longitudeDelta: 0.7)
         map.setRegion(MKCoordinateRegion(center: coordinate,
                                          span: span),
                       animated: true)
+        
+        map.showsUserLocation = true
+        map.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
         
         map.delegate = context.coordinator
         map.addAnnotation(yedikuleShelter)

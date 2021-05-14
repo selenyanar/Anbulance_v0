@@ -11,6 +11,8 @@ import Firebase
 
 struct MapView: View {
     
+    @ObservedObject private var locationManager = LocationManager()
+    
     var body: some View {
         ZStack {
             MapModel()
