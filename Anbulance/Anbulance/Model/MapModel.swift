@@ -14,7 +14,7 @@ struct MapModel: UIViewRepresentable {
     
     let view = UIView()
     let map = MKMapView()
-
+    
     func makeUIView(context: Context) -> UIView {
         
         view.addSubview(map)
@@ -68,12 +68,15 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         case is AnimalAnnotation:
             annotationView.image = #imageLiteral(resourceName: "AnbulanceRedPin")
             annotationView.frame.size = CGSize(width: 50, height: 50)
-        default:
+        case is MKUserLocation:
             annotationView.image = #imageLiteral(resourceName: "GreenCircle")
             annotationView.frame.size = CGSize(width: 20, height: 20)
+        default:
+            annotationView.image = #imageLiteral(resourceName: "AnbulancePin")
+            annotationView.frame.size = CGSize(width: 50, height: 50)
         }
         
-            return annotationView
+        return annotationView
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -88,5 +91,18 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         print("annotation is tapped")
         
     }
-
+    
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        
+        if let annotationView = views.first {
+            if let annotation = annotationView.annotation {
+                if annotation is MKUserLocation {
+                    let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 7000, longitudinalMeters: 7000)
+                    mapView.setRegion(region, animated: true)
+                    
+                }
+            }
+        }
+    }
 }
