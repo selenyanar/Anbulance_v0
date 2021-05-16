@@ -23,7 +23,7 @@ struct LaunchView: View {
                     
                     if self.status {
                         
-                        MapView()
+                        ReportView()
                         
                     } else {
                            

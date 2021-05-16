@@ -6,8 +6,20 @@
 //
 
 import SwiftUI
+import CoreLocation
+import Firebase
 
 struct ReportView: View {
+    
+    @ObservedObject private var locationManager = LocationManager()
+    var currentLocation: CLLocationCoordinate2D?
+    let db = Firestore.firestore()
+    let firebaseServices = FirebaseService()
+    var ref: DocumentReference? = nil
+    var latitudeRef = Any.self
+    var longitudeRef = Any.self
+    var key = String()
+    
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
@@ -43,38 +55,61 @@ struct ReportView: View {
                 .cornerRadius(8)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 1))
                 .offset(y: -50)
-            ZStack {
-                Button(
-                    action: {
-                        print("Yayınla")},
-                    label: {
+            Button(
+                action: {
+                    print("Yayınla")
+                    guard let lat = currentLocation?.latitude,
+                          let lon = currentLocation?.longitude
+                    else {
+                        return
+                    }
+                    let post = Post(latitude: lat,
+                                    longitude: lon,
+                                    title: "DENEME",
+                                    detailsText: "DENEMEX")
+                    
+                    firebaseServices.addNewEntry(post: post,
+                                                 completion: { result in
+                        switch result {
+                        
+                        case .success():
+                            print("sucess")
+                        case .failure(_):
+                            print("failiure")
+                        }
+                    })
+                    
+                    
+                },
+                label: {
+                    ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 300, height: 50, alignment: .center)
                             .foregroundColor(Color("AnbulanceBlue"))
                             .cornerRadius(8)
-                    })
-                Text("Yayınla")
-                    .foregroundColor(.white)
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-            }
+                        Text("Yayınla")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                    }
+                })
             
-            ZStack {
-                Button(
-                    action: {
-                        print("İptal")},
-                    label: {
+            Button(
+                action: {
+                    print("İptal")},
+                label: {
+                    ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 300, height: 50, alignment: .center)
                             .foregroundColor(.gray)
                             .cornerRadius(8)
-                    })
-                Text("İptal")
-                    .foregroundColor(.white)
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-                    .padding()
-            }
+                        Text("İptal")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .padding()
+                    }
+                })
         }
         
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {

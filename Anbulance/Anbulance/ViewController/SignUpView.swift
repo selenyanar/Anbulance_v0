@@ -24,7 +24,6 @@ struct SignUpView: View {
     var body: some View {
         
         ZStack {
-            
             VStack {
                 Image("AnbulanceLogo")
                     .resizable()

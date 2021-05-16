@@ -24,6 +24,8 @@
 		16F167D82619CA6F005F75CB /* AnbulanceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167D72619CA6F005F75CB /* AnbulanceUITests.swift */; };
 		16F167E82619DF0D005F75CB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167E72619DF0D005F75CB /* LoginView.swift */; };
 		16F167EA261A09C1005F75CB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F167E9261A09C1005F75CB /* SignUpView.swift */; };
+		16F32061265113FA002EBACE /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F32060265113FA002EBACE /* FirebaseService.swift */; };
+		16F3206326511547002EBACE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3206226511547002EBACE /* Post.swift */; };
 		28DF60B4715F7CD86687743C /* Pods_Anbulance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B43CF96DB56D6DB1CD9922 /* Pods_Anbulance.framework */; };
 		582D75906EB8AC06A338DA89 /* Pods_AnbulanceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06034F5DF8413981CD2B5BFF /* Pods_AnbulanceTests.framework */; };
 		682D021229A5755E049AF0EB /* Pods_Anbulance_AnbulanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9731E8EFD8AA22B98854F14 /* Pods_Anbulance_AnbulanceUITests.framework */; };
@@ -71,6 +73,8 @@
 		16F167D92619CA6F005F75CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16F167E72619DF0D005F75CB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		16F167E9261A09C1005F75CB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		16F32060265113FA002EBACE /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		16F3206226511547002EBACE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3E20446E8AB9343D34D45815 /* Pods-AnbulanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnbulanceTests.debug.xcconfig"; path = "Target Support Files/Pods-AnbulanceTests/Pods-AnbulanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		57DC4D7D197B8E8E42F576BF /* Pods-Anbulance-AnbulanceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anbulance-AnbulanceUITests.release.xcconfig"; path = "Target Support Files/Pods-Anbulance-AnbulanceUITests/Pods-Anbulance-AnbulanceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A1B43CF96DB56D6DB1CD9922 /* Pods_Anbulance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anbulance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,8 @@
 				16646B7526206034008C970F /* TextView.swift */,
 				166A2FCF2621D93000441554 /* ImagePicker.swift */,
 				16C593CC264E5FC600CF7FB0 /* LocationManager.swift */,
+				16F32060265113FA002EBACE /* FirebaseService.swift */,
+				16F3206226511547002EBACE /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -498,8 +504,10 @@
 				16646B7626206034008C970F /* TextView.swift in Sources */,
 				16C593CD264E5FC600CF7FB0 /* LocationManager.swift in Sources */,
 				16F167E82619DF0D005F75CB /* LoginView.swift in Sources */,
+				16F3206326511547002EBACE /* Post.swift in Sources */,
 				166A2FD02621D93000441554 /* ImagePicker.swift in Sources */,
 				16646B70261CDC2F008C970F /* MapView.swift in Sources */,
+				16F32061265113FA002EBACE /* FirebaseService.swift in Sources */,
 				16F167BD2619CA6E005F75CB /* LaunchView.swift in Sources */,
 				16646B742620364E008C970F /* ReportView.swift in Sources */,
 				16646B72262024BF008C970F /* MapModel.swift in Sources */,
