@@ -7,18 +7,15 @@
 
 import SwiftUI
 import CoreLocation
-import Firebase
+import FirebaseFirestore
 
 struct ReportView: View {
     
     @ObservedObject private var locationManager = LocationManager()
-    var currentLocation: CLLocationCoordinate2D?
-    let db = Firestore.firestore()
     let firebaseServices = FirebaseService()
+    var latitude = LocationManager().latitude
+    var longitude = LocationManager().longitude
     var ref: DocumentReference? = nil
-    var latitudeRef = Any.self
-    var longitudeRef = Any.self
-    var key = String()
     
     @State private var image: Image?
     @State private var showingImagePicker = false
@@ -58,28 +55,8 @@ struct ReportView: View {
             Button(
                 action: {
                     print("Yayınla")
-                    guard let lat = currentLocation?.latitude,
-                          let lon = currentLocation?.longitude
-                    else {
-                        return
-                    }
-                    let post = Post(latitude: lat,
-                                    longitude: lon,
-                                    title: "DENEME",
-                                    detailsText: "DENEMEX")
-                    
-                    firebaseServices.addNewEntry(post: post,
-                                                 completion: { result in
-                        switch result {
-                        
-                        case .success():
-                            print("sucess")
-                        case .failure(_):
-                            print("failiure")
-                        }
-                    })
-                    
-                    
+                    print("\(latitude)")
+                    createPost()
                 },
                 label: {
                     ZStack {
@@ -122,6 +99,31 @@ struct ReportView: View {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
+    
+    // Create Firebase Document
+    
+    func createPost() {
+        guard let lat = latitude,
+              let lon = longitude else {
+            return
+        }
+        
+        let post = Post(latitude: lat,
+                        longitude: lon,
+                        description: "deneme")
+        
+        firebaseServices.addNewEntry(post: post, completion: { result in
+            switch result {
+            case .success():
+                print("konum oluşturuldu")
+            case .failure(_):
+                print("konum oluşturulamadı")
+            }
+        })
+    }
+    
+    
+    
     
     struct ReportView_Previews: PreviewProvider {
         static var previews: some View {

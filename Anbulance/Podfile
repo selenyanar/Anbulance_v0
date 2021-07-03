@@ -19,6 +19,7 @@ target 'Anbulance' do
   
   pod 'FirebaseUI/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Core'
   
   
 end

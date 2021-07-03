@@ -13,7 +13,8 @@ class LocationManager: NSObject, ObservableObject {
     
     private let locationManager = CLLocationManager()
     @Published var location: CLLocation?
-    
+    @Published var latitude : Double?
+    @Published var longitude : Double?
     
     override init() {
         
@@ -23,6 +24,7 @@ class LocationManager: NSObject, ObservableObject {
         self.locationManager.distanceFilter = kCLDistanceFilterNone
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        
     }
     
 }
@@ -31,11 +33,17 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-       guard let location = locations.last else {
-           return
-       }
+        guard let location = locations.last else {
+            return
+        }
         
-       self.location = location
-   }
+        guard let locationData: CLLocationCoordinate2D = locationManager.location?.coordinate else { return }
+        
+        latitude = locationData.latitude
+        longitude = locationData.longitude
+        
+        self.location = location
+
+    }
     
 }

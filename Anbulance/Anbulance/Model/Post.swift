@@ -13,8 +13,7 @@ struct Post {
     
     let latitude : Double
     let longitude : Double
-    let title : String?
-    let detailsText : String?
+    let description : String?
     
     
 }

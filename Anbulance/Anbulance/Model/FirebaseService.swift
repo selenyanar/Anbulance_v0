@@ -6,29 +6,24 @@
 //
 
 import Foundation
-import Firebase
-import MapKit
-
+import FirebaseFirestore
 
 class FirebaseService {
     
     let db = Firestore.firestore()
     var posts = [Post]()
-    var mapView = MKMapView()
-    
     
     func addNewEntry(post: Post, completion: @escaping (Result<Void, Error>) ->  Void) {
         
-        let ref = db.collection("posts").addDocument(data: [
+        let ref = db.document("posts")
+            ref.setData([
             "latitude" : post.latitude,
             "longitude" : post.longitude,
-            "title" : post.title,
-            "detailsText" : post.detailsText,
+            "description" : post.description!,
         ]) { err in
             if let err = err {
                 
                 completion(.failure(err))
-                
                 print("Error adding document: \(err)")
             } else {
                 completion(.success(()))

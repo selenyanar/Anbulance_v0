@@ -22,6 +22,7 @@ struct TextView: UIViewRepresentable {
         return UITextView()
     }
     
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         // Update the view
     }
