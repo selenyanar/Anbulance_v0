@@ -13,9 +13,9 @@ struct ReportView: View {
     
     @ObservedObject private var locationManager = LocationManager()
     let firebaseServices = FirebaseService()
-    var latitude = LocationManager().latitude
-    var longitude = LocationManager().longitude
     var ref: DocumentReference? = nil
+    let latitude = CLLocationManager().location?.coordinate.latitude
+    let longitude = CLLocationManager().location?.coordinate.longitude
     
     @State private var image: Image?
     @State private var showingImagePicker = false
@@ -56,6 +56,7 @@ struct ReportView: View {
                 action: {
                     print("Yayınla")
                     print("\(latitude)")
+                    print("\(longitude)")
                     createPost()
                 },
                 label: {
