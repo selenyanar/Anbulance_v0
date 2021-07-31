@@ -9,17 +9,19 @@ import SwiftUI
 import CoreLocation
 import FirebaseFirestore
 
+
 struct ReportView: View {
     
     @ObservedObject private var locationManager = LocationManager()
     let firebaseServices = FirebaseService()
-    var ref: DocumentReference? = nil
     let latitude = CLLocationManager().location?.coordinate.latitude
     let longitude = CLLocationManager().location?.coordinate.longitude
+    @State var db = Firestore.firestore()
     
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
+    
     
     var body: some View {
         VStack {
@@ -57,7 +59,8 @@ struct ReportView: View {
                     print("Yayınla")
                     print("\(latitude)")
                     print("\(longitude)")
-                    createPost()
+                    //createPost()
+                    addData()
                 },
                 label: {
                     ZStack {
@@ -94,6 +97,7 @@ struct ReportView: View {
             ImagePicker(image: self.$inputImage)
         }
         
+        
     }
     
     func loadImage() {
@@ -103,26 +107,24 @@ struct ReportView: View {
     
     // Create Firebase Document
     
-    func createPost() {
-        guard let lat = latitude,
-              let lon = longitude else {
-            return
-        }
-        
-        let post = Post(latitude: lat,
-                        longitude: lon,
-                        description: "deneme")
-        
-        firebaseServices.addNewEntry(post: post, completion: { result in
-            switch result {
-            case .success():
-                print("konum oluşturuldu")
-            case .failure(_):
-                print("konum oluşturulamadı")
+    func addData() {
+        var ref: DocumentReference? = nil
+        ref = db.collection("posts").addDocument(data: [
+            "title": String(),
+            "description": String(),
+            "latitude": latitude ?? 0,
+            "longitude": longitude ?? 0
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
             }
-        })
+        }
+
+        
     }
-    
+
     
     
     

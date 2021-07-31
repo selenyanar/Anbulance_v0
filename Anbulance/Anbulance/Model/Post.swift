@@ -6,14 +6,18 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestore
 
 
-struct Post {
- 
+struct Post: Identifiable {
     
-    let latitude : Double
-    let longitude : Double
-    let description : String?
+    var id: String = UUID().uuidString
+    
+    var latitude : Double
+    var longitude : Double
+    var description : String
+    var title : String
     
     
 }

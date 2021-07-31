@@ -8,27 +8,37 @@
 import Foundation
 import FirebaseFirestore
 
-class FirebaseService {
+class FirebaseService: ObservableObject {
     
-    let db = Firestore.firestore()
-    var posts = [Post]()
+    @Published var posts = [Post]()
+    @Published var post = Post(latitude: 0, longitude: 0, description: "", title: "")
+    private var db = Firestore.firestore()
     
-    func addNewEntry(post: Post, completion: @escaping (Result<Void, Error>) ->  Void) {
-        
-        let ref = db.document("posts")
-            ref.setData([
-            "latitude" : post.latitude,
-            "longitude" : post.longitude,
-            "description" : post.description!,
-        ]) { err in
-            if let err = err {
-                
-                completion(.failure(err))
-                print("Error adding document: \(err)")
-            } else {
-                completion(.success(()))
-                print("Document added")
+    
+    
+
+    func fetchData() {
+        db.collection("posts").addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
             }
+            
+            self.posts = documents.map { (queryDocumentSnapshot) -> Post in
+                let data = queryDocumentSnapshot.data()
+                
+                let title = data["title"] as? String ?? ""
+                let description = data["description"] as? String ?? ""
+                let latitude = data["latitude"] as? Double ?? 0
+                let longitude = data["longitude"] as? Double ?? 0
+                
+                return Post(latitude: latitude, longitude: longitude, description: description, title: title)
+                
+            }
+            
         }
     }
+ 
+    
+  
 }
