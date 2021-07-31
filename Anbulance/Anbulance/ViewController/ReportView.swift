@@ -17,7 +17,9 @@ struct ReportView: View {
     let latitude = CLLocationManager().location?.coordinate.latitude
     let longitude = CLLocationManager().location?.coordinate.longitude
     @State var db = Firestore.firestore()
+
     
+    @State private var description: String = ""
     @State private var image: Image?
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
@@ -48,12 +50,10 @@ struct ReportView: View {
                 // Select Image
                 self.showingImagePicker = true
             }
-            TextView()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("  Detaylı açıklama gir.", text: $description)
                 .frame(width: 300, height: 200, alignment: .center)
                 .cornerRadius(8)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 1))
-                .offset(y: -50)
             Button(
                 action: {
                     print("Yayınla")
@@ -72,7 +72,7 @@ struct ReportView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .fontWeight(.bold)
-                    }
+                    }.padding(.top, 40.0)
                 })
             
             Button(
@@ -110,8 +110,7 @@ struct ReportView: View {
     func addData() {
         var ref: DocumentReference? = nil
         ref = db.collection("posts").addDocument(data: [
-            "title": String(),
-            "description": String(),
+            "description": description,
             "latitude": latitude ?? 0,
             "longitude": longitude ?? 0
         ]) { err in
