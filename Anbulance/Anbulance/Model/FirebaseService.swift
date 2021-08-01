@@ -7,14 +7,12 @@
 
 import Foundation
 import FirebaseFirestore
+import MapKit
 
 class FirebaseService: ObservableObject {
     
-    @Published var posts = [Post]()
     @Published var post = Post(latitude: 0, longitude: 0, description: "", title: "")
     private var db = Firestore.firestore()
-    
-    
     
 
     func fetchData() {
@@ -24,7 +22,7 @@ class FirebaseService: ObservableObject {
                 return
             }
             
-            self.posts = documents.map { (queryDocumentSnapshot) -> Post in
+            var posts = documents.map { (queryDocumentSnapshot) -> MKAnnotation in
                 let data = queryDocumentSnapshot.data()
                 
                 let title = data["title"] as? String ?? ""
@@ -32,12 +30,20 @@ class FirebaseService: ObservableObject {
                 let latitude = data["latitude"] as? Double ?? 0
                 let longitude = data["longitude"] as? Double ?? 0
                 
-                return Post(latitude: latitude, longitude: longitude, description: description, title: title)
+                let animalAnnotations = AnimalAnnotation(title: title, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                
+                print(animalAnnotations)
+                
+                
+                return animalAnnotations
+                
                 
             }
             
         }
     }
+    
+  
  
     
   

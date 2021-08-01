@@ -8,12 +8,14 @@
 import UIKit
 import SwiftUI
 import MapKit
+import FirebaseFirestore
 
 
 struct MapModel: UIViewRepresentable {
     
     let view = UIView()
     let map = MKMapView()
+    private var db = Firestore.firestore()
     
     func makeUIView(context: Context) -> UIView {
         
@@ -38,6 +40,36 @@ struct MapModel: UIViewRepresentable {
         map.addAnnotation(yedikuleShelter)
         map.addAnnotation(kadikoy1)
         
+        
+        func fetchData() {
+            db.collection("posts").addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                
+                var posts = documents.map { (queryDocumentSnapshot) -> MKPointAnnotation in
+                    let data = queryDocumentSnapshot.data()
+                    
+                    let title = data["title"] as? String ?? ""
+                    let description = data["description"] as? String ?? ""
+                    let latitude = data["latitude"] as? Double ?? 0
+                    let longitude = data["longitude"] as? Double ?? 0
+                    
+                    let animalAnnotations = MKPointAnnotation()
+                    animalAnnotations.title = title
+                    animalAnnotations.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    print(animalAnnotations)
+                    
+                    map.addAnnotation(animalAnnotations)
+                    return animalAnnotations
+                    
+                }  
+            }
+        }
+        
+        fetchData()
     }
     
     func makeCoordinator() -> MapViewCoordinator{
@@ -102,8 +134,12 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                     let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 7000, longitudinalMeters: 7000)
                     mapView.setRegion(region, animated: true)
                     
+                    
                 }
             }
         }
     }
+    
+    
+    
 }

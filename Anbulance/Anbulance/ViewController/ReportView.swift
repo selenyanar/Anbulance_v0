@@ -61,6 +61,7 @@ struct ReportView: View {
                     print("\(longitude)")
                     //createPost()
                     addData()
+                    firebaseServices.fetchData()
                 },
                 label: {
                     ZStack {
