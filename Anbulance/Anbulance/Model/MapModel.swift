@@ -48,7 +48,7 @@ struct MapModel: UIViewRepresentable {
                     return
                 }
                 
-                var posts = documents.map { (queryDocumentSnapshot) -> MKPointAnnotation in
+                var posts = documents.map { (queryDocumentSnapshot) -> MKAnnotation in
                     let data = queryDocumentSnapshot.data()
                     
                     let title = data["title"] as? String ?? ""
@@ -56,11 +56,8 @@ struct MapModel: UIViewRepresentable {
                     let latitude = data["latitude"] as? Double ?? 0
                     let longitude = data["longitude"] as? Double ?? 0
                     
-                    let animalAnnotations = MKPointAnnotation()
-                    animalAnnotations.title = title
-                    animalAnnotations.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    
-                    print(animalAnnotations)
+                    let animalAnnotations = AnimalAnnotation(title: description,
+                                                             coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
                     
                     map.addAnnotation(animalAnnotations)
                     return animalAnnotations
@@ -124,6 +121,8 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         
         //IF STATEMENT FOR WHAT KIND OF ACTIONSHEET/SCREEN IS GOIN TO BE DISPLAYED
     }
+    
+    
     
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
