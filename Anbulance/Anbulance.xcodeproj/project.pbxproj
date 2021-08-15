@@ -13,6 +13,7 @@
 		16646B742620364E008C970F /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B732620364E008C970F /* ReportView.swift */; };
 		16646B7626206034008C970F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16646B7526206034008C970F /* TextView.swift */; };
 		166A2FD02621D93000441554 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166A2FCF2621D93000441554 /* ImagePicker.swift */; };
+		16713F2026B6E92D00D614DC /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16713F1F26B6E92D00D614DC /* DetailsView.swift */; };
 		16C593CD264E5FC600CF7FB0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C593CC264E5FC600CF7FB0 /* LocationManager.swift */; };
 		16C593CF264F8A9900CF7FB0 /* AnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C593CE264F8A9900CF7FB0 /* AnnotationModel.swift */; };
 		16C593D1264F965200CF7FB0 /* Shelters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C593D0264F965200CF7FB0 /* Shelters.swift */; };
@@ -56,6 +57,7 @@
 		16646B732620364E008C970F /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		16646B7526206034008C970F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		166A2FCF2621D93000441554 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		16713F1F26B6E92D00D614DC /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		16C593CC264E5FC600CF7FB0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		16C593CE264F8A9900CF7FB0 /* AnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationModel.swift; sourceTree = "<group>"; };
 		16C593D0264F965200CF7FB0 /* Shelters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelters.swift; sourceTree = "<group>"; };
@@ -178,11 +180,12 @@
 		16F167E52619CD03005F75CB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				16646B6F261CDC2F008C970F /* MapView.swift */,
 				16F167BC2619CA6E005F75CB /* LaunchView.swift */,
 				16F167E72619DF0D005F75CB /* LoginView.swift */,
 				16F167E9261A09C1005F75CB /* SignUpView.swift */,
-				16646B6F261CDC2F008C970F /* MapView.swift */,
 				16646B732620364E008C970F /* ReportView.swift */,
+				16713F1F26B6E92D00D614DC /* DetailsView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				16F32061265113FA002EBACE /* FirebaseService.swift in Sources */,
 				16F167BD2619CA6E005F75CB /* LaunchView.swift in Sources */,
 				16646B742620364E008C970F /* ReportView.swift in Sources */,
+				16713F2026B6E92D00D614DC /* DetailsView.swift in Sources */,
 				16646B72262024BF008C970F /* MapModel.swift in Sources */,
 				16F167BB2619CA6E005F75CB /* AnbulanceApp.swift in Sources */,
 				16C593D1264F965200CF7FB0 /* Shelters.swift in Sources */,
