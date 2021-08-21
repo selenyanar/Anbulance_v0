@@ -12,13 +12,14 @@ import FirebaseStorage
 
 
 struct ReportView: View {
+    @Environment(\.presentationMode) private var presentationMode
     
     @ObservedObject private var locationManager = LocationManager()
     let firebaseServices = FirebaseService()
     let latitude = CLLocationManager().location?.coordinate.latitude
     let longitude = CLLocationManager().location?.coordinate.longitude
     @State var db = Firestore.firestore()
-
+    
     
     @State private var description: String = ""
     @State private var image: Image?
@@ -63,6 +64,7 @@ struct ReportView: View {
                     //createPost()
                     uploadImageAndAddData()
                     firebaseServices.fetchData()
+                    presentationMode.wrappedValue.dismiss()
                 },
                 label: {
                     ZStack {
@@ -79,7 +81,9 @@ struct ReportView: View {
             
             Button(
                 action: {
-                    print("İptal")},
+                    presentationMode.wrappedValue.dismiss()},
+                
+                
                 label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
@@ -126,7 +130,7 @@ struct ReportView: View {
                 return
             }
             // Metadata contains file metadata such as size, content-type.
-//            let size = metadata.size
+            //            let size = metadata.size
             // You can also access to download URL after upload.
             riversRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
@@ -136,9 +140,9 @@ struct ReportView: View {
                 addData(imageUrl: downloadURL.absoluteString)
             }
         }
-
+        
     }
-
+    
     // Create Firebase Document
     func addData(imageUrl : String) {
         var ref: DocumentReference? = nil
@@ -155,7 +159,7 @@ struct ReportView: View {
             }
         }
     }
-
+    
     struct ReportView_Previews: PreviewProvider {
         static var previews: some View {
             ReportView()
