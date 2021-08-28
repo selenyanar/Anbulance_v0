@@ -10,25 +10,26 @@ import SwiftUI
 import MapKit
 import FirebaseFirestore
 
-extension MapModel {
-    
-    public func onAnnotationTapped(perform action: @escaping ((MKAnnotation?) -> Void)) -> MapModel {
-        var new = self
-        new.onAnnotationTappedCallback = action
-        return new
-    }
-
-}
-
 
 struct MapModel: UIViewRepresentable {
     
-    var onAnnotationTappedCallback: ((MKAnnotation?) -> Void)?
+    let view = UIView()
     let map = MKMapView()
     private var db = Firestore.firestore()
     
     func makeUIView(context: Context) -> UIView {
-        return map
+        
+        view.addSubview(map)
+        map.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            map.widthAnchor.constraint(equalTo: view.widthAnchor),
+            map.heightAnchor.constraint(equalTo: view.heightAnchor),
+            map.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            map.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            
+        ])
+        return view
     }
     
     
@@ -47,26 +48,21 @@ struct MapModel: UIViewRepresentable {
                     return
                 }
                 
-                let posts = documents.map { (queryDocumentSnapshot) -> MKAnnotation in
+                var posts = documents.map { (queryDocumentSnapshot) -> MKAnnotation in
                     let data = queryDocumentSnapshot.data()
-                    
-                    print(data.debugDescription)
                     
                     let title = data["title"] as? String ?? ""
                     let description = data["description"] as? String ?? ""
-                    let imageUrl = data["imageUrl"] as? String ??
-                        "https://via.placeholder.com/468x300?text=No%20image"
-
                     let latitude = data["latitude"] as? Double ?? 0
                     let longitude = data["longitude"] as? Double ?? 0
                     
                     let animalAnnotations = AnimalAnnotation(title: description,
                                                              coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), imageUrl: imageUrl)
                     
+                    map.addAnnotation(animalAnnotations)
                     return animalAnnotations
                     
                 }
-                map.addAnnotations(posts)
             }
         }
         
@@ -82,7 +78,7 @@ struct MapModel: UIViewRepresentable {
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
     var mapModelController: MapModel
-
+    
     init(_ control: MapModel) {
         self.mapModelController = control
     }
@@ -119,16 +115,19 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
         
     }
     
+    
+    
     //Display alert once annotation is tapped
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        let annotation = view.annotation;
-        self.mapModelController.onAnnotationTappedCallback?(annotation)
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            print("annotation is tapped")
+            
+            
+            //IF STATEMENT FOR WHAT KIND OF ACTIONSHEET/SCREEN IS GOIN TO BE DISPLAYED
+            
+            
+        }
         
-        print("annotation is tapped - \(String(describing: annotation))")
-        
-        //IF STATEMENT FOR WHAT KIND OF ACTIONSHEET/SCREEN IS GOIN TO BE DISPLAYED
-    }
     
     
     
@@ -142,11 +141,10 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
                     mapView.setRegion(region, animated: true)
                     
                     
+                    
                 }
             }
         }
     }
-    
-    
     
 }

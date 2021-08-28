@@ -8,9 +8,12 @@
 import Foundation
 import SwiftUI
 import FirebaseUI
+import Firebase
 import SDWebImageSwiftUI
 
 struct AnimalDetailView: View {
+    
+    private var db = Firestore.firestore()
     
     var animalAnnotation: AnimalAnnotation?
     
@@ -40,6 +43,24 @@ struct AnimalDetailView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .fontWeight(.bold)
+                    }
+                })
+            Button(
+                action: {
+                    print("kurtarıldı")
+                    
+                },
+                label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .frame(width: 350, height: 50, alignment: .center)
+                            .foregroundColor(.green)
+                            .cornerRadius(8)
+                        Text("Kurtarıldı")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .padding()
                     }
                 })
         }

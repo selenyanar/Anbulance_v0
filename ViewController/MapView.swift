@@ -20,10 +20,11 @@ struct MapView: View {
 
     var body: some View {
         ZStack {
-            
 
             // NAVIGATION LINK FOR ANIMAL DETAIL VIEW
-            NavigationLink(destination: AnimalDetailView(animalAnnotation: animalAnnotation), tag: "animal_detail_view_tag", selection: $annotaionSelection) { EmptyView()
+            NavigationLink(
+                destination: AnimalDetailView(animalAnnotation: animalAnnotation),
+                tag: "animal_detail_view_tag", selection: $annotaionSelection) { EmptyView()
             }
 
             MapModel().onAnnotationTapped(perform: { annotation in
